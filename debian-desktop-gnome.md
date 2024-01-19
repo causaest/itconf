@@ -93,8 +93,7 @@ deb-src http://deb.debian.org/debian/ bookworm main contrib non-free non-free-fi
 deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
 deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
 
-# bookworm-updates, to get updates before a point release is made;
-# see https://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_updates_and_backports
+# bookworm-updates, to get updates before a point release is made
 deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
 deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
 
@@ -118,20 +117,6 @@ Update repos:
 
 ```
 $ sudo apt-get update && sudo apt-get -y dist-upgrade
-```
-
-### Enable/disable Wayland/Xorg
-
-To change from Wayland to XServer (optional):
-
-```
-$ sudo nano /etc/gdm3/daemon.conf
-```
-
-Uncomment the following line and reboot:
-
-```
-#WaylandEnable=false
 ```
 
 ### Enable bash completion
@@ -158,6 +143,20 @@ $ sudo nano /etc/default/grub
 - (Optional) To hide GRUB menu, enable the line `GRUB_TIMEOUT_STYLE=hidden`
 
 Update by running `$ sudo update-grub` in the terminal.
+
+### Enable/disable Wayland/Xorg
+
+To change from Wayland to XServer (optional):
+
+```
+$ sudo nano /etc/gdm3/daemon.conf
+```
+
+Uncomment the following line and reboot:
+
+```
+#WaylandEnable=false
+```
 
 ### Window buttons
 
@@ -199,10 +198,11 @@ $ sudo apt-get install -y debian-goodies laptop-mode-tools gdebi-core mc rsync p
 $ sudo apt-get install -y geany geany-plugins
 ```
 
-#### Spelling tools:
+#### Spelling tools (to check):
 
-todo
+```
 $ sudo apt-get install -y hunspell hunspell-en-gb hunspell-el hunspell-de-de hunspell-de-at
+```
 
 #### Audio and video applications:
 
@@ -213,7 +213,7 @@ $ sudo apt-get install -y vlc soundconverter handbrake-gtk deadbeef audacity asu
 ### GNOME enhancements:
 
 ```
-$ sudo apt-get install -y gnome-system-tools gnome-software-plugin-flatpak gnome-software-plugin-snap gnome-power-manager gnome-dictionary viagee nautilus-dropbox nautilus-admin nautilus-image-converter dconf-editor alacarte gscan2pdf galculator guvcview gparted glabels gnumeric gnucash gnucash-docs
+$ sudo apt-get install -y gnome-system-tools gnome-software-plugin-flatpak gnome-software-plugin-snap gnome-power-manager gnome-dictionary gnome-screenshot viagee nautilus-dropbox nautilus-admin nautilus-image-converter dconf-editor alacarte gscan2pdf galculator guvcview gparted glabels gnumeric gnucash gnucash-docs
 ```
 
 #### Misc desktop applications:
@@ -342,30 +342,4 @@ The following commands will get the installation script, show script's content, 
 
 ```
 curl -f https://downloads.surfshark.com/linux/debian-install.sh --output surfshark-install.sh && cat surfshark-install.sh && sh surfshark-install.sh
-```
-
-### Miniconda
-
-Get Miniconda from [here](https://docs.conda.io/projects/miniconda/en/latest/). Miniconda defaults to installing in the ~/miniconda3 directory, but it's better to install it in a hidden directory ~/.miniconda3 instead.
-
-```
-mkdir -p ~/.miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.miniconda3/miniconda.sh
-bash ~/miniconda3/.miniconda.sh -b -u -p ~/miniconda3
-rm -rf ~/.miniconda3/miniconda.sh
-```
-
-### Oracle VirtualBox
-
-Add to the software sources file:
-
-deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] https://download.virtualbox.org/virtualbox/debian bookworm contrib
-
-Download the Oracle public key for verifying the signature and add the key with
-
-wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-
-```
-sudo apt-get update
-sudo apt-get install virtualbox-7.0
 ```
